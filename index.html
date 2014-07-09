@@ -18,7 +18,7 @@
 		<script>
 			$(document).ready(function() { 
 
-				$('a').not('.external').on('click', function() { 
+				$('a.section').on('click', function() { 
 
 					$('.slide').hide();
 
@@ -28,36 +28,77 @@
 					current_section = section_offsets[$(this).attr('href').replace('#', '')];
 				});
 
-				section_offsets = { 'why' : 0, 'about': 1, 'access': 2 };
+				$('a.subsection').on('click', function() { 
 
-				current_section = null;
-				last_section = null;
+					$('.slide').hide();
 
-				$('.slideholder').swipe({ swipeRight: function(e) { last_section = current_section; show_section(current_section - 1, last_section, -1); },
-			 							  swipeLeft: function(e) { last_section = current_section; show_section(current_section + 1, last_section, 1); }
+					$($(this).attr('href')).show();
+					$($(this).attr('href')).css( { left: 0 });
+
+					t = /[0-9+]/g;
+					res = t.exec($(this).attr('href'))
+
+					current_subsection = res[0];
+
 				});
 
+				section_offsets = { 'why' : 0, 'about': 1, 'access': 2 };
+
+				current_section = 0;
+				current_subsection = 0;
+				last_section = null;
+				last_subsection = null;
+
+				$('.slideholder').swipe({ swipeRight: function(e) { console.log('swiperight'); last_section = current_section; show_section(current_section - 1, last_section, -1); },
+			 							  swipeLeft: function(e) { console.log('swipeleft'); last_section = current_section; show_section(current_section + 1, last_section, 1); }
+				});
+
+				$('.slide').swipe({ swipeUp: function(e) { console.log('swipeup'); last_subsection = current_subsection; show_subsection(current_subsection + 1, last_subsection, -1); },
+			 							  swipeDown: function(e) { console.log('swipedown'); last_subsection = current_subsection; show_subsection(current_subsection - 1, last_subsection, 1); }
+				});
+
+				show_subsection = function(new_index, last_index, dir) {
+					
+					// console.log(new_index);
+					// console.log($('.slideholder').eq(current_section).children().eq(new_index).length);
+					if (new_index < 0 || new_index > $('.slideholder').eq(current_section).children().length)
+						return;
+
+					current_subsection = new_index;
+
+					if (dir == 1)
+					{
+						$('.slideholder').eq(current_section).children().eq(new_index).css({ left: '0px', top: '-608px', 'display': 'block' });
+						$('.slide:visible').animate({ top: '+=608px' });
+					}
+					else
+					{
+						$('.slideholder').eq(current_section).children().eq(new_index).css({ left: '0px', top: '608px', 'display': 'block' })
+						$('.slide:visible').animate({ top: '-=608px' });
+					}
+				}
+
 				show_section = function(new_index, last_index, dir) {
-					// alert('loo');
-					current_section = new_index;
 
 					if ($('.slideholder').eq(new_index).length == 0)
 						return;
+
+					current_section = new_index;
 
 					$('.slideholder').eq(new_index).children().eq(0).show();
 
 					if (dir == 1)
 					{
-						$('.slideholder').eq(new_index).css({ left: '1024px', top: '103px', 'display': 'block' });
+						$('.slideholder').eq(new_index).css({ left: '1024px', 'display': 'block' });
 						$('.slideholder:visible').animate({ left: '-=1024px' });
 					}
 					else
 					{
-						$('.slideholder').eq(new_index).css({ left: '-1024px', top: '103px', 'display': 'block' })
+						$('.slideholder').eq(new_index).css({ left: '-1024px', 'display': 'block' })
 						$('.slideholder:visible').animate({ left: '+=1024px' });
 					}
-					// alert('moo');
 				}
+
 
 
 			});
@@ -72,15 +113,23 @@
 					&nbsp;
 					<table style="width: 100%; margin-top: 228px;">
 						<tr>
-							<td style="width: 36%; text-align: center;"><a href="#why" class="app"><img src="res/images/home_why.png"></a></td>
-							<td style="width: 31%; text-align: center;"><a href="#about"><img src="res/images/home_about.png"></td>
-							<td style="width: 32%; text-align: center;"><a href="#access"><img src="res/images/home_access.png"></td>
+							<td style="width: 36%; text-align: center;"><a href="#why" class="section"><img src="res/images/home_why.png"></a></td>
+							<td style="width: 31%; text-align: center;"><a href="#about" class="section"><img src="res/images/home_about.png"></td>
+							<td style="width: 32%; text-align: center;"><a href="#access" class="section"><img src="res/images/home_access.png"></td>
 						</tr>
 					</table>
 				</div>
 				<div id="why" class="slideholder">
-					<div id="why_1" class="slide">
-						<img src="res/images/SUBOXONE-1.0-Why-201400704-v6.jpg">
+					<div id="why_1" class="slide" style="background-image: url(res/images/SUBOXONE-1.0-Why-201400704-v6.jpg);">
+						&nbsp;
+						<table style="margin-top: 131px; margin-left: 50px;">
+							<tr>
+								<td style="width: 240px; text-align: left;"><a href="#why_1" class="subsection"><img src="res/images/why_1.png"></a></td>
+								<td style="width: 240px; text-align: left;"><a href="#why_2" class="subsection"><img src="res/images/why_2.png"></td>
+								<td style="width: 240px; text-align: left;"><a href="#why_3" class="subsection"><img src="res/images/why_3.png"></td>
+								<td style="width: 240px; text-align: left;"><a href="#why_4" class="subsection"><img src="res/images/why_4.png"></td>
+							</tr>
+						</table>
 					</div>
 					<div id="why_2" class="slide">
 						<img src="res/images/SUBOXONE-1.1-Prevalence-201400704-v6.jpg">
