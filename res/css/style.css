@@ -1,7 +1,46 @@
 html, body, .wrap { width: 1024px; height: 768px; margin: 0px; position: relative; }
 .wrap { }
 .header { width: 1024px; height: 103px; background-color: #04c1d4; background-image: url(../images/header_flower.png); background-repeat: no-repeat; background-position: center left; position: relative; z-index: 9999; }
-.content { width: 100%; height: 608px; overflow: hidden; top: 103px ;}
+.content { width: 100%; /*height: 608px;*/height: 711px; overflow: hidden; /*top: 103px;*/top: 0;}
 .slide { width: 1024px; height: 608px; display: none; z-index: 9000; position: absolute; }
 .slideholder { display: none; width: 1024px; height: 608px; position: fixed; top: 103px; }
 .footer { width: 1024px; height: 57px; background-color: #005696; position: relative; z-index: 9999; }
+#rnb{position: absolute; width: 85px; height: 45px; right: 60px; bottom: 30px;}
+.popup-wrapper{
+	width: 940px;
+	height: 680px;
+	background: rgba(205,243,246,0.9);
+	top: 50px;
+	left: 40px;
+	border: 2px solid #04c1d4;
+	position: absolute;
+	z-index: 99998;
+	display: none;
+}
+.small-popup-wrapper{
+	width: auto;
+	height: auto;
+	background: #fff;
+	border: 2px solid #04c1d4;
+	position: absolute;
+	z-index: 99998;
+	display: none;
+}
+.close-popup{
+	position: absolute;
+	top: 25px;
+	right: 25px;
+}
+::-webkit-scrollbar {
+    width: 25px;
+}
+ 
+::-webkit-scrollbar-track {
+    background: #04c1d4; 
+    border-radius: 0;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background: #82e0ea; 
+}
