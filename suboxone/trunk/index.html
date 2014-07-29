@@ -21,6 +21,7 @@
 				$('a.section').on('click', function() { 
 
 					$('.slide').hide();
+					$('.slideholder').hide();
 
 					$($(this).attr('href')).show();
 					$($(this).attr('href')).children().eq(0).show();
@@ -33,8 +34,8 @@
 					$('.slide').hide();
 
 					$($(this).attr('href')).show();
-					$($(this).attr('href')).css( { left: 0 });
-
+					//$($(this).attr('href')).css( { left: 0 });
+					$($(this).attr('href')).css( { top: 0 })
 					t = /[0-9+]/g;
 					res = t.exec($(this).attr('href'))
 
@@ -49,19 +50,35 @@
 				last_section = null;
 				last_subsection = null;
 
-				$('.slideholder').swipe({ swipeRight: function(e) { console.log('swiperight'); last_section = current_section; show_section(current_section - 1, last_section, -1); },
-			 							  swipeLeft: function(e) { console.log('swipeleft'); last_section = current_section; show_section(current_section + 1, last_section, 1); }
+				$('.slideholder').swipe({ swipeRight: function(e) { 
+					console.log('swiperight'); 
+					last_section = current_section; 
+					show_section(current_section - 1, last_section, -1); 
+				},
+			 	swipeLeft: function(e) { 
+			 		console.log('swipeleft'); 
+			 		last_section = current_section; 
+			 		show_section(current_section + 1, last_section, 1); 
+			 	}
 				});
 
-				$('.slide').swipe({ swipeUp: function(e) { console.log('swipeup'); last_subsection = current_subsection; show_subsection(current_subsection + 1, last_subsection, -1); },
-			 							  swipeDown: function(e) { console.log('swipedown'); last_subsection = current_subsection; show_subsection(current_subsection - 1, last_subsection, 1); }
+				$('.slide').swipe({ swipeUp: function(e) { 
+					console.log('swipeup'); 
+					last_subsection = current_subsection; 
+					show_subsection(current_subsection + 1, last_subsection, -1); 
+				},
+			 	swipeDown: function(e) { 
+			 		console.log('swipedown'); 
+			 		last_subsection = current_subsection; 
+			 		show_subsection(current_subsection - 1, last_subsection, 1); 
+			 	}
 				});
 
 				show_subsection = function(new_index, last_index, dir) {
 					
 					// console.log(new_index);
 					// console.log($('.slideholder').eq(current_section).children().eq(new_index).length);
-					if (new_index < 0 || new_index > $('.slideholder').eq(current_section).children().length)
+					if (new_index < 0 || new_index > $('.slideholder').eq(current_section).children().length -1)
 						return;
 
 					current_subsection = new_index;
@@ -69,12 +86,13 @@
 					if (dir == 1)
 					{
 						$('.slideholder').eq(current_section).children().eq(new_index).css({ left: '0px', top: '-608px', 'display': 'block' });
-						$('.slide:visible').animate({ top: '+=608px' });
+
+						$('.slideholder:eq('+ current_section + ') .slide:visible').animate({ top: '+=608px' });
 					}
 					else
 					{
 						$('.slideholder').eq(current_section).children().eq(new_index).css({ left: '0px', top: '608px', 'display': 'block' })
-						$('.slide:visible').animate({ top: '-=608px' });
+						$('.slideholder:eq('+ current_section + ') .slide:visible').animate({ top: '-=608px' });
 					}
 				}
 
@@ -98,7 +116,12 @@
 						$('.slideholder:visible').animate({ left: '+=1024px' });
 					}
 				}
-
+				$('a.pop-up').on('click', function(){
+					$($(this).attr('href')).fadeIn();
+				})
+				$('a.close-popup').on('click', function(){
+					$(this).parent().fadeOut();
+				})
 
 
 			});
@@ -106,73 +129,118 @@
 	</head>
 	<body>
 		<div class="wrap">
-			<div class="header">
-			</div>
 			<div class="content">
-				<div id="home" class="slide" style="background-image: url(res/images/home_bg.png); display: block;">
-					&nbsp;
-					<table style="width: 100%; margin-top: 228px;">
+				<div id="home" class="slide" style="background-image: url(res/images/home_bg.png); display: block; height: 711px; z-index: 99999;">
+					<table style="width: 100%; margin-top: 330px;">
 						<tr>
-							<td style="width: 36%; text-align: center;"><a href="#why" class="section"><img src="res/images/home_why.png"></a></td>
-							<td style="width: 31%; text-align: center;"><a href="#about" class="section"><img src="res/images/home_about.png"></td>
-							<td style="width: 32%; text-align: center;"><a href="#access" class="section"><img src="res/images/home_access.png"></td>
+							<td style="width: 35%; text-align: center;"><a href="#why" class="section"><img src="res/images/home_why.png"></a></td>
+							<td style="width: 28%; text-align: center;"><a href="#about" class="section"><img src="res/images/home_about.png"></td>
+							<td style="width: 35%; text-align: center;"><a href="#access" class="section"><img src="res/images/home_access.png"></td>
 						</tr>
 					</table>
+					<div id="rnb"><img src="res/images/r&b_logo.png"></div>
+				</div>
+				<div class="header">
+					<table style="float:right;margin-right:50px;">
+							<tr>
+								<td style="width: 140px; text-align: left;"><a href="#why" class="section"><img src="res/images/top-why.png"></a></td>
+								<td style="width: 140px; text-align: left;"><a href="#about" class="section"><img src="res/images/top-about.png"></td>
+								<td style="width: 103px; text-align: left;"><a href="#access" class="section"><img src="res/images/top-access.png"></td>
+							</tr>
+						</table>
+				</div>
+				<div class="popup-wrapper" id="why_3_popup">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/why-3-popup-1.png" style="margin-top:30px;">
+					<div style="overflow-y:scroll;height:455px;margin-top:15px;margin-right:23px;"><img style="margin-left:28px;" src="res/images/why-3-popup-2.png"></div>
+				</div>
+
+				<div class="small-popup-wrapper" id="dosing_popup_1" style="top:185px;left:290px">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/dosing_popup_1.png" style="margin-top:30px">
+				</div>
+				<div class="popup-wrapper" id="safety-profile" style="background: #fff;">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/safety-profile-1.png" style="margin-top:30px;margin-left:28px;">
+					<div style="overflow-y:scroll;height:510px;margin-top:15px;margin-right:23px;"><img style="margin-left:28px;" src="res/images/safety-profile.png"></div>
 				</div>
 				<div id="why" class="slideholder">
-					<div id="why_1" class="slide" style="background-image: url(res/images/SUBOXONE-1.0-Why-201400704-v6.jpg);">
-						&nbsp;
+					<div id="why_1" class="slide" style="background-image: url(res/images/why-landing.png);">
 						<table style="margin-top: 131px; margin-left: 50px;">
 							<tr>
-								<td style="width: 240px; text-align: left;"><a href="#why_1" class="subsection"><img src="res/images/why_1.png"></a></td>
-								<td style="width: 240px; text-align: left;"><a href="#why_2" class="subsection"><img src="res/images/why_2.png"></td>
-								<td style="width: 240px; text-align: left;"><a href="#why_3" class="subsection"><img src="res/images/why_3.png"></td>
-								<td style="width: 240px; text-align: left;"><a href="#why_4" class="subsection"><img src="res/images/why_4.png"></td>
+								<td style="width: 240px; text-align: left;"><a href="#why_2" class="subsection"><img src="res/images/why_1.png"></a></td>
+								<td style="width: 240px; text-align: left;"><a href="#why_3" class="subsection"><img src="res/images/why_2.png"></td>
+								<td style="width: 240px; text-align: left;"><a href="#why_4" class="subsection"><img src="res/images/why_3.png"></td>
 							</tr>
 						</table>
 					</div>
 					<div id="why_2" class="slide">
-						<img src="res/images/SUBOXONE-1.1-Prevalence-201400704-v6.jpg">
+						<img src="res/images/why-prevalence.png">
 					</div>
 					<div id="why_3" class="slide">
-						<img src="res/images/SUBOXONE-1.2-Spectrum-201400704-v6.jpg">
+						<img src="res/images/why-risk.png">
+						<a href="#why_3_popup" class="pop-up" style="position:absolute; top: 342px; right: 86px;"><img src="res/images/info_button.png"></a>
 					</div>
 					<div id="why_4" class="slide">
-						<img src="res/images/SUBOXONE-1.3-Dependence-201400704-v6.jpg">
+						<img src="res/images/why-dependence.png">
 					</div>
 				</div>
 				<div id="about" class="slideholder">
-					<div id="about_1" class="slide">
-						<img src="res/images/SUBOXONE-2.0.-About-landing-photo2-201400704-v6.jpg">
+					<div id="about_1" class="slide" style="background-image: url(res/images/about-landing.png);">
+						<table style="margin-top: 131px; margin-left: 50px;">
+							<tr>
+								<td style="width: 240px; text-align: left;"><a href="#about_2" class="subsection"><img src="res/images/about_1.png"></a></td>
+								<td style="width: 240px; text-align: left;"><a href="#about_3" class="subsection"><img src="res/images/about_2.png"></td>
+								<td style="width: 240px; text-align: left;"><a href="#about_4" class="subsection"><img src="res/images/about_3.png"></td>
+								<td style="width: 240px; text-align: left;"><a href="#about_5" class="subsection"><img src="res/images/about_4.png"></td>
+							</tr>
+						</table>
 					</div>
 					<div id="about_2" class="slide">
-						<img src="res/images/SUBOXONE-2.1-B&N-201400704-v6.jpg">
+						<img src="res/images/about-buprenorphine.png">
 					</div>
 					<div id="about_3" class="slide">
-						<img src="res/images/SUBOXONE-2.3-Ceiling-Effect-201400704-v6.jpg">
+						<img src="res/images/about-admin.png">
 					</div>
 					<div id="about_4" class="slide">
-						<img src="res/images/SUBOXONE-2.4-Administration-201400704-v6.jpg">
+						<img src="res/images/about-moa.png">
+					</div>
+					<div id="about_5" class="slide">
+						<img src="res/images/about-effect.png">
 					</div>
 				</div>
 
 				<div id="access" class="slideholder">
-					<div id="acces_1" class="slide">
-						<img src="res/images/SUBOXONE-3.0-Access-landing-photo2-201400704-v6.jpg">
+					<div id="acces_1" class="slide" style="background-image: url(res/images/access-landing.png);">
+						<table style="margin-top: 131px; margin-left: 50px;">
+							<tr>
+								<td style="width: 240px; text-align: left;"><a href="#access_2" class="subsection"><img src="res/images/access_1.png"></a></td>
+								<td style="width: 240px; text-align: left;"><a href="#access_3" class="subsection"><img src="res/images/access_2.png"></td>
+							</tr>
+						</table>
 					</div>
-					<div id="acces_2" class="slide">
-						<img src="res/images/SUBOXONE-3.1-Suboxone-CME-201400704-v6.jpg">
+					<div id="access_2" class="slide">
+						<img src="res/images/access-cme.png">
 					</div>
-					<div id="acces_3" class="slide">
+					<div id="access_3" class="slide">
 						<img src="res/images/SUBOXONE-3.2-Coverage-201400704-v6.jpg">
 					</div>
-					<div id="acces_4" class="slide">
-						<img src="res/images/SUBOXONE-3.2-Coverage-map-clicked-201400704-v6.jpg">
+				</div>
+				<div id="dosing" class="slideholder">
+					<div id="dosing_1" class="slide" style="background-image: url(res/images/dosing-landing.png);">
+						<a href="#dosing_popup_1" class="pop-up" style="position:absolute; top: 135px; left: 250px;"><img src="res/images/info_button_small.png"></a>
 					</div>
 				</div>
 			</div>
 			<div class="footer">
 				<img src="res/images/menu.png"><img src="res/images/foot_logo.png">
+				<table style="float:right;margin-right:50px;">
+							<tr>
+								<td style="width: 115px; text-align: left;"><a href="#dosing" class="section"><img src="res/images/bottom-dosing.png"></a></td>
+								<td style="width: 143px; text-align: left;"><a href="#safety-profile" class="pop-up"><img src="res/images/bottom-sp.png"></td>
+								<td style="width: 115px; text-align: left;"><a href="#access" class="section"><img src="res/images/bottom-references.png"></td>
+							</tr>
+						</table>
 			</div>
 		</div>
 	</body>
