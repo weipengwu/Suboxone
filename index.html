@@ -25,6 +25,8 @@
 
 					$($(this).attr('href')).show();
 					$($(this).attr('href')).children().eq(0).show();
+					$($(this).attr('href')).css({top:'103px',left:'0'});
+					$($(this).attr('href')).children().eq(0).css({top:'0',left:'0'});
 
 					current_section = section_offsets[$(this).attr('href').replace('#', '')];
 				});
@@ -41,6 +43,14 @@
 
 					current_subsection = res[0];
 
+				});
+
+				$('.map-province').on('click', function(){
+					$('.map-province').removeClass('active');
+					var map = $(this).attr('id');
+					$('.map').html('<img src="res/images/map-landing-'+map+'.png">');
+
+					$('#'+map).addClass('active');
 				});
 
 				section_offsets = { 'why' : 0, 'about': 1, 'access': 2 };
@@ -222,8 +232,14 @@
 					<div id="access_2" class="slide">
 						<img src="res/images/access-cme.png">
 					</div>
-					<div id="access_3" class="slide">
-						<img src="res/images/SUBOXONE-3.2-Coverage-201400704-v6.jpg">
+					<div id="access_3" class="slide" style="background-image:url(res/images/map-landing-alt.png)">
+						<div class="map"><img src="res/images/map-landing.png"></div>
+						<div class="map-province" id="bc" style="position:absolute;top:245px;left:72px;z-index:9001;background-image:url(res/images/map-bc.png);width:150px;height:218px;">
+						</div>
+						<div class="map-province" id="ab" style="position:absolute;top:294px;left:188px;z-index:9001;background-image:url(res/images/map-ab.png);width:100px;height:177px;">
+						</div>
+						<div class="map-province" id="sk" style="position:absolute;top:310px;left:263px;z-index:9001;background-image:url(res/images/map-sk.png);width:87px;height:170px;">
+						</div>
 					</div>
 				</div>
 				<div id="dosing" class="slideholder">

@@ -31,6 +31,18 @@ html, body, .wrap { width: 1024px; height: 768px; margin: 0px; position: relativ
 	top: 25px;
 	right: 25px;
 }
+.map{
+	position: relative;
+}
+.active#bc{
+	background: url(../../res/images/map-bc-tap.png)!important;
+}
+.active#ab{
+	background: url(../../res/images/map-ab-tap.png)!important;
+}
+.active#sk{
+	background: url(../../res/images/map-sk-tap.png)!important;
+}
 ::-webkit-scrollbar {
     width: 25px;
 }
