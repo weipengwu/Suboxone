@@ -6,6 +6,11 @@ html, body, .wrap { width: 1024px; height: 768px; margin: 0px; position: relativ
 .slideholder { display: none; width: 1024px; height: 608px; position: fixed; top: 103px; }
 .footer { width: 1024px; height: 57px; background-color: #005696; position: relative; z-index: 9999; }
 #rnb{position: absolute; width: 85px; height: 45px; right: 60px; bottom: 30px;}
+#why_1{background-image:  url(../../res/images/why-landing.png)}
+#about_1{background-image:  url(../../res/images/about-landing.png)}
+#acces_1{background-image:  url(../../res/images/access-landing.png)}
+#access_3{background-image:  url(../../res/images/map-landing-alt.png)}
+#dosing_1{background-image:  url(../../res/images/dosing-landing.png)}
 .popup-wrapper{
 	width: 940px;
 	height: 680px;
