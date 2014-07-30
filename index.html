@@ -22,6 +22,8 @@
 
 					$('.slide').hide();
 					$('.slideholder').hide();
+					$('.slide').removeAttr("style");
+					$('.slideholder').removeAttr("style");
 
 					$($(this).attr('href')).show();
 					$($(this).attr('href')).children().eq(0).show();
@@ -29,6 +31,7 @@
 					$($(this).attr('href')).children().eq(0).css({top:'0',left:'0'});
 
 					current_section = section_offsets[$(this).attr('href').replace('#', '')];
+					//console.log(current_section);
 				});
 
 				$('a.subsection').on('click', function() { 
@@ -42,6 +45,7 @@
 					res = t.exec($(this).attr('href'))
 
 					current_subsection = res[0];
+					afterclick = 1;
 
 				});
 
@@ -75,12 +79,23 @@
 				$('.slide').swipe({ swipeUp: function(e) { 
 					console.log('swipeup'); 
 					last_subsection = current_subsection; 
-					show_subsection(current_subsection + 1, last_subsection, -1); 
+					if (typeof afterclick =="undefined" || afterclick == null) {
+						show_subsection(current_subsection + 1, last_subsection, -1); 
+					}else{
+						show_subsection(current_subsection, last_subsection - 1, -1); 
+						afterclick = null;
+					}
 				},
 			 	swipeDown: function(e) { 
 			 		console.log('swipedown'); 
 			 		last_subsection = current_subsection; 
-			 		show_subsection(current_subsection - 1, last_subsection, 1); 
+			 		console.log(current_subsection); 
+			 		if (typeof afterclick =="undefined" || afterclick == null) {			
+			 			show_subsection(current_subsection - 1, last_subsection, 1);  			
+			 		}else{
+						show_subsection(current_subsection - 2, last_subsection - 1, 1); 
+						afterclick = null;
+			 		}
 			 	}
 				});
 
