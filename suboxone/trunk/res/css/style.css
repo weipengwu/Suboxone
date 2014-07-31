@@ -48,6 +48,27 @@ html, body, .wrap { width: 1024px; height: 768px; margin: 0px; position: relativ
 .active#sk{
 	background: url(../../res/images/map-sk-tap.png)!important;
 }
+.active#mb{
+	background: url(../../res/images/map-mb-tap.png)!important;
+}
+.active#on{
+	background: url(../../res/images/map-on-tap.png)!important;
+}
+.active#nb{
+	background: url(../../res/images/map-nb-tap.png)!important;
+}
+.active#ns{
+	background: url(../../res/images/map-ns-tap.png)!important;
+}
+.active#pei{
+	background: url(../../res/images/map-pei-tap.png)!important;
+}
+.active#nl{
+	background: url(../../res/images/map-nl-tap.png)!important;
+}
+.active#qc{
+	background: url(../../res/images/map-qc-tap.png)!important;
+}
 ::-webkit-scrollbar {
     width: 25px;
 }
