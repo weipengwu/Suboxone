@@ -19,8 +19,9 @@ html, body, .wrap { width: 1024px; height: 768px; margin: 0px; position: relativ
 	left: 40px;
 	border: 2px solid #04c1d4;
 	position: absolute;
-	z-index: 99998;
-	display: none;
+	z-index: 0;
+	/*z-index: 99990;*/
+/*	display: none;*/
 }
 .small-popup-wrapper{
 	width: auto;
@@ -28,13 +29,54 @@ html, body, .wrap { width: 1024px; height: 768px; margin: 0px; position: relativ
 	background: #fff;
 	border: 2px solid #04c1d4;
 	position: absolute;
-	z-index: 99998;
-	display: none;
+	z-index: 0;
 }
 .close-popup{
 	position: absolute;
 	top: 25px;
 	right: 25px;
+}
+#wrapper1, #wrapper2, #wrapper3{
+	position: relative;
+	overflow: hidden;
+	height: 455px;
+	z-index: 99994;
+	/* Prevent native touch events on Windows */
+	-ms-touch-action: none;
+
+	/* Prevent the callout on tap-hold and text selection */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+	/* Prevent text resize on orientation change, useful for web-apps */
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-o-text-size-adjust: none;
+	text-size-adjust: none;
+}
+.scroller{
+	position: absolute;
+	z-index: 99995;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-o-text-size-adjust: none;
+	text-size-adjust: none;
 }
 .map{
 	position: relative;
@@ -69,16 +111,40 @@ html, body, .wrap { width: 1024px; height: 768px; margin: 0px; position: relativ
 .active#qc{
 	background: url(../../res/images/map-qc-tap.png)!important;
 }
-::-webkit-scrollbar {
-    width: 25px;
+.thumbslide {
+position: absolute;
+left: 0;
+bottom: 0;
+width: 1024px;
+height: 179px;
+border-top: 1px solid #9aa9b3;
+background: #496070;
+color: #fff;
+z-index: 99999;
+display: none;
+}
+.thumbslide .hidebtn {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../../res/images/button-nav-x.jpg) center top no-repeat;
+	background-size: 23px 22px;
+	height: 22px;
+	width: 23px;
+}
+.iScrollVerticalScrollbar {
+    width: 25px!important;
+    position: absolute;
+z-index: 9999;
+top:2px;
+right: 2px;
+overflow: hidden;
+background: #04c1d4; 
+height: 100%;
 }
  
-::-webkit-scrollbar-track {
-    background: #04c1d4; 
-    border-radius: 0;
-}
- 
-::-webkit-scrollbar-thumb {
-    border-radius: 0;
-    background: #82e0ea; 
+.iScrollIndicator {
+    border-radius: 0!important;
+    background: #82e0ea!important; 
+    border: 0!important;
 }
