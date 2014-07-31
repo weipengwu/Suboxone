@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="res/css/reset.css">
 		<script src="res/js/jquery.js" type="text/javascript"></script>
 		<script src="res/js/jquery.touchwipe.js" type="text/javascript"></script>
+		<script src="res/js/iscroll.js" type="text/javascript"></script>
 		<title>SUBOXONE_HCP_IVA - Homepage</title>
 		<script>
 			$(document).ready(function() { 
@@ -31,7 +32,29 @@
 					$($(this).attr('href')).children().eq(0).css({top:'0',left:'0'});
 
 					current_section = section_offsets[$(this).attr('href').replace('#', '')];
-					//console.log(current_section);
+					console.log(current_section);
+					switch(current_section){
+						case 0:
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-why').show();
+							break;
+						case 1:
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-about').show();
+							break;
+						case 2:
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-access').show();
+							break;
+						default :
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#bottom-dosing-leaf').show();
+							break;
+					}
 				});
 
 				$('a.subsection').on('click', function() { 
@@ -57,20 +80,71 @@
 					$('#'+map).addClass('active');
 				});
 
+				$('#thumbmenu').on('click', function(){
+					$('.thumbslide').slideDown();
+				})
+				$('.hidebtn').on('click', function(){
+					$('.thumbslide').slideUp();
+				})
+
 				section_offsets = { 'why' : 0, 'about': 1, 'access': 2 };
 
-				current_section = 0;
+				//current_section = 0;
 				current_subsection = 0;
 				last_section = null;
 				last_subsection = null;
 
 				$('.slideholder').swipe({ swipeRight: function(e) { 
 					console.log('swiperight'); 
+					console.log(current_section);
+					switch(current_section - 1 ){
+						case 0:
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-why').show();
+							break;
+						case 1:
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-about').show();
+							break;
+						case 2:
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-access').show();
+							break;
+						default :
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').show();
+							break;
+					}
 					last_section = current_section; 
 					show_section(current_section - 1, last_section, -1); 
 				},
 			 	swipeLeft: function(e) { 
 			 		console.log('swipeleft'); 
+			 		console.log(current_section);
+			 		switch(current_section + 1 ){
+						case 0:
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-why').show();
+							break;
+						case 1:
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-about').show();
+							break;
+						case 2:
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-access').show();
+							break;
+						default :
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').show();
+							break;
+					}
 			 		last_section = current_section; 
 			 		show_section(current_section + 1, last_section, 1); 
 			 	}
@@ -142,20 +216,43 @@
 					}
 				}
 				$('a.pop-up').on('click', function(){
-					$($(this).attr('href')).fadeIn();
+					$($(this).attr('href')).css('z-index','99990');
 				})
 				$('a.close-popup').on('click', function(){
-					$(this).parent().fadeOut();
+					$(this).parent().css('z-index','0');
+					$('#bottom-sp-leaf').hide();
+					$('#bottom-ref-leaf').hide();
 				})
 
+				$('.footer a').on('click', function(){
+					var leaf = $(this).attr('id');
+					$('.leaf').hide();
+					$('#'+leaf+'-leaf').show();
+				})
+				$('#bottom-sp').on('click',function(){
+					$('#references').hide();
+				})
+				$('#bottom-ref').on('click',function(){
+					$('#safety-profile').hide();
+				})
+				var myScroll1 = new IScroll('#wrapper1',{
+				    mouseWheel: false,
+				    scrollbars: true
+				});
+				var myScroll2 = new IScroll('#wrapper2',{
+				    mouseWheel: false,
+				    scrollbars: true
+				});
+				document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 
 			});
 		</script>
 	</head>
 	<body>
+		
 		<div class="wrap">
 			<div class="content">
-				<div id="home" class="slide" style="background-image: url(res/images/home_bg.png); display: block; height: 711px; z-index: 99999;">
+				<div id="home" class="slide" style="background-image: url(res/images/home_bg.png); display: block; height: 711px; z-index: 88888;">
 					<table style="width: 100%; margin-top: 330px;">
 						<tr>
 							<td style="width: 35%; text-align: center;"><a href="#why" class="section"><img src="res/images/home_why.png"></a></td>
@@ -173,16 +270,28 @@
 								<td style="width: 103px; text-align: left;"><a href="#access" class="section"><img src="res/images/top-access.png"></td>
 							</tr>
 						</table>
+						<img src="res/images/top-leaf.png" id="top-why" class="top-leaf" style="position:absolute; top:10px; right:345px; display:none;">
+						<img src="res/images/top-leaf.png" id="top-about" class="top-leaf" style="position:absolute; top:10px; right:205px; display:none;">
+						<img src="res/images/top-leaf.png" id="top-access" class="top-leaf" style="position:absolute; top:10px; right:65px; display:none;">
+				</div>
+				<div class="popup-wrapper" id="why_2_popup">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/why-2-chart.png" style="margin: 80px auto 0;width: 753px;display: block;">
 				</div>
 				<div class="popup-wrapper" id="why_3_popup">
 					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
 					<img src="res/images/why-3-popup-1.png" style="margin-top:30px;">
-					<div style="overflow-y:scroll;height:455px;margin-top:15px;margin-right:23px;"><img style="margin-left:28px;" src="res/images/why-3-popup-2.png"></div>
+					<div id="wrapper1" style="height:455px;margin-top:15px;margin-right:23px;"><div class="scroller"><img style="margin-left:28px;" height="900" src="res/images/why-3-popup-2.png"></div></div>
 				</div>
 
 				<div class="small-popup-wrapper" id="dosing_popup_1" style="top:185px;left:290px">
 					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
 					<img src="res/images/dosing_popup_1.png" style="margin-top:30px">
+				</div>
+				<div class="popup-wrapper" id="dosing_popup_2" style="width: 705px;background: rgb(255, 255, 255);left: 150px;height: 563px;top: 109px;">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/dosing_popup_2_1.png" style="margin-top:30px;margin-left:28px;">
+					<div id="wrapper2" style="width:680px;"><div class="scroller"><img style="margin:10px 28px" width="586" height="920" src="res/images/dosing_popup_2_2.png"></div></div>
 				</div>
 				<div class="popup-wrapper" id="safety-profile" style="background: #fff;">
 					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
@@ -193,6 +302,9 @@
 					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
 					<img src="res/images/references-1.png" style="margin-top:30px;margin-left:28px;">
 					<div style="overflow-y:scroll;height:550px;margin-top:15px;margin-right:23px;"><img style="margin-left:28px;" src="res/images/references-2.png"></div>
+				</div>
+				<div class="thumbslide">
+					<div class="btn hidebtn"></div>
 				</div>
 				<div id="why" class="slideholder">
 					<div id="why_1" class="slide" style="background-image: url(res/images/why-landing.png);">
@@ -206,6 +318,7 @@
 					</div>
 					<div id="why_2" class="slide">
 						<img src="res/images/why-prevalence.png">
+						<a href="#why_2_popup" class="pop-up" style="position:absolute; top: 226px; right: 265px;"><img src="res/images/zoom-icon.png"></a>
 					</div>
 					<div id="why_3" class="slide">
 						<img src="res/images/why-risk.png">
@@ -279,18 +392,22 @@
 				<div id="dosing" class="slideholder">
 					<div id="dosing_1" class="slide" style="background-image: url(res/images/dosing-landing.png);">
 						<a href="#dosing_popup_1" class="pop-up" style="position:absolute; top: 135px; left: 250px;"><img src="res/images/info_button_small.png"></a>
+						<a href="#dosing_popup_2" class="pop-up" style="position:absolute; top: 135px; left: 490px;"><img src="res/images/info_button_small.png"></a>
 					</div>
 				</div>
 			</div>
 			<div class="footer">
-				<img src="res/images/menu.png"><img src="res/images/foot_logo.png">
+				<img id="thumbmenu" src="res/images/menu.png"><img src="res/images/foot_logo.png">
 				<table style="float:right;margin-right:50px;">
 							<tr>
-								<td style="width: 115px; text-align: left;"><a href="#dosing" class="section"><img src="res/images/bottom-dosing.png"></a></td>
-								<td style="width: 143px; text-align: left;"><a href="#safety-profile" class="pop-up"><img src="res/images/bottom-sp.png"></td>
-								<td style="width: 115px; text-align: left;"><a href="#references" class="pop-up"><img src="res/images/bottom-references.png"></td>
+								<td style="width: 122px; text-align: left;"><a href="#dosing" id="bottom-dosing" class="section"><img src="res/images/bottom-dosing.png"></a></td>
+								<td style="width: 152px; text-align: left;"><a href="#safety-profile" id="bottom-sp" class="pop-up"><img src="res/images/bottom-sp.png"></td>
+								<td style="width: 115px; text-align: left;"><a href="#references" id="bottom-ref" class="pop-up"><img src="res/images/bottom-references.png"></td>
 							</tr>
 						</table>
+						<img src="res/images/bottom-leaf.png" id="bottom-dosing-leaf" class="leaf" style="position:absolute; top:20px; right:420px; display:none;">
+						<img src="res/images/bottom-leaf.png" id="bottom-sp-leaf" class="leaf" style="position:absolute; top:20px; right:308px; display:none;">
+						<img src="res/images/bottom-leaf.png" id="bottom-ref-leaf" class="leaf" style="position:absolute; top:20px; right:149px; display:none;">
 			</div>
 		</div>
 	</body>
