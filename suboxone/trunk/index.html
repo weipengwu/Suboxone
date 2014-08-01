@@ -32,6 +32,7 @@
 					$($(this).attr('href')).children().eq(0).css({top:'0',left:'0'});
 
 					current_section = section_offsets[$(this).attr('href').replace('#', '')];
+					current_subsection = 0;
 					console.log(current_section);
 					switch(current_section){
 						case 0:
@@ -57,6 +58,49 @@
 					}
 				});
 
+				$('a.thumb-subsection').on('click', function() { 
+
+					$('.slide').hide();
+					$('.slideholder').hide();
+					$($(this).attr('href')).parent().show();
+					 $($(this).attr('href')).parent().css( { left: 0 , top: '103px'});
+					
+					$($(this).attr('href')).show();
+					$($(this).attr('href')).css( { left: 0 , top: 0});
+					t = /[0-9+]/g;
+					res = t.exec($(this).attr('href'))
+
+					current_subsection = res[0];
+					current_section = section_offsets[$($(this).attr('href')).parent().attr('id').replace('#', '')];
+					afterclick = 1;
+					var holder = $($(this).attr('href')).parent().attr('id');
+					switch(holder){
+						case 'why':
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-why').show();
+							break;
+						case 'about':
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-about').show();
+							break;
+						case 'access':
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#top-access').show();
+							break;
+						default :
+							$('.top-leaf').hide();
+							$('#bottom-dosing-leaf').hide();
+							$('#bottom-dosing-leaf').show();
+							break;
+					}
+					setTimeout(function(){
+						$('.thumbslide').removeClass('active');
+					},1000)
+
+				});
 				$('a.subsection').on('click', function() { 
 
 					$('.slide').hide();
@@ -69,6 +113,7 @@
 
 					current_subsection = res[0];
 					afterclick = 1;
+					console.log(current_subsection);
 
 				});
 
@@ -81,15 +126,15 @@
 				});
 
 				$('#thumbmenu').on('click', function(){
-					$('.thumbslide').slideDown();
+					$('.thumbslide').addClass('active');
 				})
 				$('.hidebtn').on('click', function(){
-					$('.thumbslide').slideUp();
+					$('.thumbslide').removeClass('active');
 				})
 
 				section_offsets = { 'why' : 0, 'about': 1, 'access': 2 };
 
-				//current_section = 0;
+				current_section = 0;
 				current_subsection = 0;
 				last_section = null;
 				last_subsection = null;
@@ -120,6 +165,7 @@
 					}
 					last_section = current_section; 
 					show_section(current_section - 1, last_section, -1); 
+					current_subsection = 0;
 				},
 			 	swipeLeft: function(e) { 
 			 		console.log('swipeleft'); 
@@ -146,12 +192,15 @@
 							break;
 					}
 			 		last_section = current_section; 
+			 		
 			 		show_section(current_section + 1, last_section, 1); 
+			 		current_subsection = 0;
 			 	}
 				});
 
 				$('.slide').swipe({ swipeUp: function(e) { 
 					console.log('swipeup'); 
+					console.log(current_subsection);
 					last_subsection = current_subsection; 
 					if (typeof afterclick =="undefined" || afterclick == null) {
 						show_subsection(current_subsection + 1, last_subsection, -1); 
@@ -177,7 +226,7 @@
 					
 					// console.log(new_index);
 					// console.log($('.slideholder').eq(current_section).children().eq(new_index).length);
-					if (new_index < 0 || new_index > $('.slideholder').eq(current_section).children().length -1)
+					if (new_index < 0 || new_index > $('.slideholder').eq(current_section).children().length-1)
 						return;
 
 					current_subsection = new_index;
@@ -230,16 +279,43 @@
 					$('#'+leaf+'-leaf').show();
 				})
 				$('#bottom-sp').on('click',function(){
-					$('#references').hide();
+					$('#references').css('z-index','0');
 				})
 				$('#bottom-ref').on('click',function(){
-					$('#safety-profile').hide();
+					$('#safety-profile').css('z-index','0');
 				})
+				$('.overlay').on('click', function(){
+					$(this).next().fadeIn();
+				})
+				$('#rnb').on('click', function(){
+					$(this).fadeOut();
+					$('#rnb-tap').fadeIn();
+				})
+				// var thumbScroll = new IScroll('.thumbscroller_holder',{
+				//     scrollX: true,
+				// 	scrollY: false,
+				// 	momentum: false,
+				// 	snap: true,
+				// 	snapSpeed: 400,
+				// 	keyBindings: true,
+				// 	indicators: {
+				// 		el: document.getElementById('indicator'),
+				// 		resize: false
+				// 	}
+				// });
 				var myScroll1 = new IScroll('#wrapper1',{
 				    mouseWheel: false,
 				    scrollbars: true
 				});
 				var myScroll2 = new IScroll('#wrapper2',{
+				    mouseWheel: false,
+				    scrollbars: true
+				});
+				var myScroll3 = new IScroll('#wrapper3',{
+				    mouseWheel: false,
+				    scrollbars: true
+				});
+				var myScroll4 = new IScroll('#wrapper4',{
 				    mouseWheel: false,
 				    scrollbars: true
 				});
@@ -261,6 +337,7 @@
 						</tr>
 					</table>
 					<div id="rnb"><img src="res/images/r&b_logo.png"></div>
+					<img id="rnb-tap" src="res/images/logo-tap.png" style="position:absolute;top:609px;right:51px;display:none;">
 				</div>
 				<div class="header">
 					<table style="float:right;margin-right:50px;">
@@ -283,7 +360,10 @@
 					<img src="res/images/why-3-popup-1.png" style="margin-top:30px;">
 					<div id="wrapper1" style="height:455px;margin-top:15px;margin-right:23px;"><div class="scroller"><img style="margin-left:28px;" height="900" src="res/images/why-3-popup-2.png"></div></div>
 				</div>
-
+				<div class="popup-wrapper" id="about_5_popup">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/about-5-chart.png" style="margin: 80px auto 0;width: 753px;display: block;">
+				</div>
 				<div class="small-popup-wrapper" id="dosing_popup_1" style="top:185px;left:290px">
 					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
 					<img src="res/images/dosing_popup_1.png" style="margin-top:30px">
@@ -293,18 +373,67 @@
 					<img src="res/images/dosing_popup_2_1.png" style="margin-top:30px;margin-left:28px;">
 					<div id="wrapper2" style="width:680px;"><div class="scroller"><img style="margin:10px 28px" width="586" height="920" src="res/images/dosing_popup_2_2.png"></div></div>
 				</div>
+				<div class="small-popup-wrapper" id="dosing_popup_3" style="top:270px;left:320px">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/dosing_popup_3.png" style="margin:70px 70px 30px 30px">
+				</div>
+				<div class="small-popup-wrapper" id="dosing_popup_4" style="top:250px;left:315px">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/dosing_popup_4.png" style="margin:60px 50px 30px 30px">
+				</div>
+				<div class="small-popup-wrapper" id="dosing_popup_5" style="top:260px;left:315px">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/dosing_popup_5.png" style="margin:60px 50px 30px 30px">
+				</div>
+				<div class="small-popup-wrapper" id="dosing_popup_6" style="top:300px;left:315px">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/dosing_popup_6.png" style="margin:60px 80px 30px 30px">
+				</div>
+				<div class="small-popup-wrapper" id="dosing_popup_7" style="top:300px;left:300px">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/dosing_popup_7.png" style="margin:60px 80px 30px 30px">
+				</div>
+				<div class="small-popup-wrapper" id="dosing_popup_8" style="top:300px;left:300px">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/dosing_popup_8.png" style="margin:60px 80px 30px 30px">
+				</div>
+				<div class="small-popup-wrapper" id="dosing_popup_9" style="top:300px;left:300px">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/dosing_popup_9.png" style="margin:60px 80px 30px 30px">
+				</div>
+				<div class="small-popup-wrapper" id="dosing_popup_10" style="top:250px;left:280px">
+					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
+					<img src="res/images/dosing_popup_10.png" style="margin:60px 80px 30px 30px">
+				</div>
 				<div class="popup-wrapper" id="safety-profile" style="background: #fff;">
 					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
 					<img src="res/images/safety-profile-1.png" style="margin-top:30px;margin-left:28px;">
-					<div style="overflow-y:scroll;height:510px;margin-top:15px;margin-right:23px;"><img style="margin-left:28px;" src="res/images/safety-profile.png"></div>
+					<div id="wrapper3" style="width:913px;height:550px"><div class="scroller"><img style="margin-left:28px; margin-top:28px;" src="res/images/safety-profile.png"></div></div>
 				</div>
 				<div class="popup-wrapper" id="references">
 					<a href="javascript:void(0)" class="close-popup"><img src="res/images/close_popup.png"></a>
 					<img src="res/images/references-1.png" style="margin-top:30px;margin-left:28px;">
-					<div style="overflow-y:scroll;height:550px;margin-top:15px;margin-right:23px;"><img style="margin-left:28px;" src="res/images/references-2.png"></div>
+					<div id="wrapper4" style="width:913px;height:550px"><div class="scroller"><img style="margin-left:28px;margin-top:28px;" src="res/images/references-2.png"></div></div>
 				</div>
 				<div class="thumbslide">
 					<div class="btn hidebtn"></div>
+					<div class="thumbscroller_holder">
+						<div class="thumbscroller">
+							<div class="thumb" style="background-image:url(res/images/thumb-1.png)"><a href="" class="section"></a><span class="label">Homepage</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-2.png)"><a href="#why" class="section"></a><span class="label">Treating</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-3.png)"><a href="#why_2" class="thumb-subsection"></a><span class="label">Prevalence</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-4.png)"><a href="#why_3" class="thumb-subsection"></a><span class="label">Risk Factors & Diagnosis</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-5.png)"><a href="#why_4" class="thumb-subsection"></a><span class="label">Opioid Dependence</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-6.png)"><a href="#about" class="section"></a><span class="label">About</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-7.png)"><a href="#about_2" class="thumb-subsection"></a><span class="label">Buprenorphine and Naloxone</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-8.png)"><a href="#about_3" class="thumb-subsection"></a><span class="label">administration</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-9.png)"><a href="#about_4" class="thumb-subsection"></a><span class="label">MOA</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-10.png)"><a href="#about_5" class="thumb-subsection"></a><span class="label">ceiling Effect</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-11.png)"><a href="#access" class="section"></a><span class="label">Access</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-12.png)"><a href="#access_2" class="thumb-subsection"></a><span class="label">Suboxone CME</span></div>
+							<div class="thumb" style="background-image:url(res/images/thumb-13.png)"><a href="#access_3" class="thumb-subsection"></a><span class="label">Coverage</span></div>
+						</div>
+					</div>
 				</div>
 				<div id="why" class="slideholder">
 					<div id="why_1" class="slide" style="background-image: url(res/images/why-landing.png);">
@@ -326,6 +455,14 @@
 					</div>
 					<div id="why_4" class="slide">
 						<img src="res/images/why-dependence.png">
+						<div>		
+						<span class="overlay" style="position:absolute; top: 373px; right: 386px;"><img src="res/images/info_button_alt.png"></span>
+						<img src="res/images/why-4-overlay.png" class="overlay-image" style="position:absolute; top: 198px; right: 374px;">
+						</div>
+						<div>
+						<span class="overlay" style="position:absolute; top: 373px; right: 92px;"><img src="res/images/info_button_alt.png"></span>
+						<img src="res/images/why-4-overlay.png" class="overlay-image" style="position:absolute; top: 198px; right: 82px;">
+						</div>
 					</div>
 				</div>
 				<div id="about" class="slideholder">
@@ -350,6 +487,7 @@
 					</div>
 					<div id="about_5" class="slide">
 						<img src="res/images/about-effect.png">
+						<a href="#about_5_popup" class="pop-up" style="position:absolute; top: 128px; right: 123px;"><img src="res/images/zoom-icon.png"></a>
 					</div>
 				</div>
 
@@ -381,7 +519,7 @@
 						</div>
 						<div class="map-province" id="ns" style="position:absolute;top:471px;left:685px;z-index:9009;background-image:url(res/images/map-ns.png);width:46px;height:57px;">
 						</div>
-						<div class="map-province" id="pei" style="position:absolute;top:478px;left:694px;z-index:9010;background-image:url(res/images/map-pei.png);width:21px;height:10px;">
+						<div class="map-province" id="pei" style="position:absolute;top:460px;left:694px;z-index:9010;background-image:url(res/images/map-pei.png);width:21px;height:30px;">
 						</div>
 						<div class="map-province" id="nl" style="position:absolute;top:295px;left:638px;z-index:9006;background-image:url(res/images/map-nl.png);width:160px;height:162px;">
 						</div>
@@ -393,9 +531,18 @@
 					<div id="dosing_1" class="slide" style="background-image: url(res/images/dosing-landing.png);">
 						<a href="#dosing_popup_1" class="pop-up" style="position:absolute; top: 135px; left: 250px;"><img src="res/images/info_button_small.png"></a>
 						<a href="#dosing_popup_2" class="pop-up" style="position:absolute; top: 135px; left: 490px;"><img src="res/images/info_button_small.png"></a>
+						<a href="#dosing_popup_3" class="pop-up" style="position:absolute; top: 210px; left: 490px;"><img src="res/images/info_button_small.png"></a>
+						<a href="#dosing_popup_4" class="pop-up" style="position:absolute; top: 270px; left: 490px;"><img src="res/images/info_button_small.png"></a>
+						<a href="#dosing_popup_5" class="pop-up" style="position:absolute; top: 350px; left: 490px;"><img src="res/images/info_button_small.png"></a>
+						<a href="#dosing_popup_6" class="pop-up" style="position:absolute; top: 415px; left: 490px;"><img src="res/images/info_button_small.png"></a>
+						<a href="#dosing_popup_7" class="pop-up" style="position:absolute; top: 127px; left: 688px;"><img src="res/images/info_button_small.png"></a>
+						<a href="#dosing_popup_8" class="pop-up" style="position:absolute; top: 202px; left: 688px;"><img src="res/images/info_button_small.png"></a>
+						<a href="#dosing_popup_9" class="pop-up" style="position:absolute; top: 314px; left: 688px;"><img src="res/images/info_button_small.png"></a>
+						<a href="#dosing_popup_10" class="pop-up" style="position:absolute; top: 357px; left: 885px;"><img src="res/images/info_button_small.png"></a>
 					</div>
 				</div>
-			</div>
+			</div><!-- end of content -->
+			<div class="bg"></div>
 			<div class="footer">
 				<img id="thumbmenu" src="res/images/menu.png"><img src="res/images/foot_logo.png">
 				<table style="float:right;margin-right:50px;">
@@ -410,5 +557,6 @@
 						<img src="res/images/bottom-leaf.png" id="bottom-ref-leaf" class="leaf" style="position:absolute; top:20px; right:149px; display:none;">
 			</div>
 		</div>
+		<script type="text/javascript" src="res/js/js-bottom.js"></script>
 	</body>
 </html>
