@@ -57,6 +57,9 @@
 							$('#bottom-dosing-leaf').show();
 							break;
 					}
+					setTimeout(function(){
+						$('.thumbslide').removeClass('active');
+					},1000)
 				});
 
 				$('a.thumb-subsection').on('click', function() { 
