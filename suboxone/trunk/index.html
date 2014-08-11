@@ -24,7 +24,7 @@
 
 					$('.slide').hide();
 					$('.slideholder').hide();
-					$('.slide').removeAttr("style");
+					$('.slide').not('#home').removeAttr("style");
 					$('.slideholder').removeAttr("style");
 
 					$($(this).attr('href')).show();
@@ -553,7 +553,7 @@
 			</div><!-- end of content -->
 			<div class="bg"></div>
 			<div class="footer">
-				<img id="thumbmenu" src="res/images/menu.png"><img src="res/images/foot_logo.png">
+				<a href="#home" onclick="$('#home').show(); return false;"><img id="thumbmenu" src="res/images/menu.png"><img src="res/images/foot_logo.png"></a>
 				<table style="float:right;margin-right:50px;">
 							<tr>
 								<td style="width: 122px; text-align: left;"><a href="#dosing" id="bottom-dosing" class="section"><img src="res/images/bottom-dosing.png"></a></td>
