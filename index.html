@@ -256,12 +256,14 @@
 
 					if (dir == 1)
 					{
+						alert('newindex' + new_index);
 						$('.slideholder').eq(current_section).children().eq(new_index).css({ left: '0px', top: '-608px', 'display': 'block' });
 
 						$('.slideholder:eq('+ current_section + ') .slide:visible').animate({ top: '+=608px' });
 					}
 					else
 					{
+						alert('newindex' + new_index);
 						$('.slideholder').eq(current_section).children().eq(new_index).css({ left: '0px', top: '608px', 'display': 'block' })
 						$('.slideholder:eq('+ current_section + ') .slide:visible').animate({ top: '-=608px' });
 					}
