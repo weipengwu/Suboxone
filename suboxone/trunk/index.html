@@ -165,6 +165,7 @@
 				$('.slideholder').swipe({ swipeRight: function(e) { 
 					console.log('swiperight'); 
 					console.log(current_section);
+					current_subsection = 0;
 					switch(current_section - 1 ){
 						case 0:
 							$('.top-leaf').hide();
@@ -193,6 +194,7 @@
 			 	swipeLeft: function(e) { 
 			 		console.log('swipeleft'); 
 			 		console.log(current_section);
+			 		current_subsection = 0;
 			 		switch(current_section + 1 ){
 						case 0:
 							$('.top-leaf').hide();
