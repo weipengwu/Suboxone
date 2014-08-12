@@ -289,7 +289,8 @@
 					current_section = new_index;
 
 					$('.slideholder').eq(new_index).children().hide();
-					$('.slideholder').eq(new_index).children().eq(0).show();
+					$('.slideholder').eq(new_index).children().first().css('top', '0px');
+					$('.slideholder').eq(new_index).children().first().show();
 
 					if (dir == 1)
 					{
