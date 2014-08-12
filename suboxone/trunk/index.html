@@ -166,8 +166,12 @@
 					console.log('swiperight'); 
 					console.log(current_section);
 
-					if (current_section - 1 < 0)
-			 			return;
+					if (current_section - 1 == -1)
+					{
+						$('#home').css({ top: '0px', display: 'block' });
+						return;
+					}
+			 			
 
 					current_subsection = 0;
 					switch(current_section - 1 ){
