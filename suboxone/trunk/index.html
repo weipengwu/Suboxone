@@ -221,7 +221,7 @@
 			 	}
 				});
 
-				$('.slide').swipe({ swipeUp: function(e) { 
+				$('.slide').not('#home').swipe({ swipeUp: function(e) { 
 					console.log('swipeup'); 
 					console.log(current_subsection);
 					last_subsection = current_subsection; 
