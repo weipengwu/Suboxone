@@ -226,8 +226,10 @@
 					console.log(current_subsection);
 					last_subsection = current_subsection; 
 					if (typeof afterclick =="undefined" || afterclick == null) {
+						console.log('ma');
 						show_subsection(current_subsection + 1, last_subsection, -1); 
 					}else{
+						console.log('mo');
 						show_subsection(current_subsection, last_subsection - 1, -1); 
 						afterclick = null;
 					}
