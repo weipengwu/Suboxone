@@ -143,6 +143,25 @@
 				last_section = null;
 				last_subsection = null;
 
+				$('#home').swipe({ swipeLeft: function(e) { 
+
+					$('#home').animate({ left: '-=1024' });
+					$('.slideholder').eq(0).css({ left: '1024px', 'display': 'block' });
+					$('.slideholder').children().first().show();
+					$('.slideholder').eq(0).animate({ left: '-=1024px' });
+
+				}, 
+								   swipeUp: function(e) { 
+
+					$('#home').animate({ top: '-=800' });
+				   	$('.slideholder').eq(0).css({ left: '0px', top: '608px', 'display': 'block' })
+				   	$('.slideholder').children().first().show();
+					$('.slideholder').eq(0).animate({ top: '-=500px' });
+
+
+								    } 
+								});
+
 				$('.slideholder').swipe({ swipeRight: function(e) { 
 					console.log('swiperight'); 
 					console.log(current_section);
