@@ -187,6 +187,7 @@
 							$('#bottom-dosing-leaf').show();
 							break;
 					}
+
 					last_section = current_section; 
 					show_section(current_section - 1, last_section, -1); 
 					current_subsection = 0;
@@ -195,6 +196,10 @@
 			 		console.log('swipeleft'); 
 			 		console.log(current_section);
 			 		current_subsection = 0;
+
+			 		if (current_subsection + 1 > 2)
+			 			return;
+			 		
 			 		switch(current_section + 1 ){
 						case 0:
 							$('.top-leaf').hide();
@@ -217,7 +222,7 @@
 							break;
 					}
 			 		last_section = current_section; 
-			 		
+
 			 		show_section(current_section + 1, last_section, 1); 
 			 		current_subsection = 0;
 			 	}
