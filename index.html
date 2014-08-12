@@ -146,6 +146,7 @@
 				$('#home').swipe({ swipeLeft: function(e) { 
 
 					$('#home').animate({ left: '-=1024' });
+					$('#top-why').show();
 					$('.slideholder').eq(0).css({ left: '1024px', 'display': 'block' });
 					$('.slideholder').children().hide();
 					$('.slideholder').children().first().show();
@@ -154,6 +155,7 @@
 				}, 
 								   swipeUp: function(e) { 
 					$('#home').animate({ top: '-=800' });
+					$('#top-why').show();
 				   	$('.slideholder').eq(0).css({ left: '0px', top: '608px', 'display': 'block' })
 				   	$('.slideholder').children().hide();
 				   	$('.slideholder').children().first().show();
