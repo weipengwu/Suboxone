@@ -147,14 +147,15 @@
 
 					$('#home').animate({ left: '-=1024' });
 					$('.slideholder').eq(0).css({ left: '1024px', 'display': 'block' });
+					$('.slideholder').children().hide();
 					$('.slideholder').children().first().show();
 					$('.slideholder').eq(0).animate({ left: '-=1024px' });
 
 				}, 
 								   swipeUp: function(e) { 
-
 					$('#home').animate({ top: '-=800' });
 				   	$('.slideholder').eq(0).css({ left: '0px', top: '608px', 'display': 'block' })
+				   	$('.slideholder').children().hide();
 				   	$('.slideholder').children().first().show();
 					$('.slideholder').eq(0).animate({ top: '-=500px' });
 
@@ -168,6 +169,7 @@
 
 					if (current_section - 1 == -1)
 					{
+
 						$('#home').css({'left': '-1024px', 'display': 'block'});
 						$('#home').animate({ left: '+=1024px'});
 						$('.slideholder').eq(0).animate({ left: '+=1024px'});
