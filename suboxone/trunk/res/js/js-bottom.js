@@ -23,7 +23,7 @@ setTimeout(function () {
 var target = e.target;
 while (target.nodeType != 1) target = target.parentNode;
 
-if (target.tagName != 'a')
+if (target.tagName == 'A')
 e.preventDefault();
 }});
     
