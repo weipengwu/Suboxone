@@ -19,7 +19,7 @@ setTimeout(function () {
     var maxscrolloffset = (thumbscrollerwidth - thumbscrollerholderwidth) * -1;
     $('.thumbscroller').css('width', thumbscrollerwidth + 'px');
 
-    var thumbscroller = new IScroll('.thumbscroller_holder', { scrollX: true, scrollY: false, bounce: false, momentum: true});
+    var thumbscroller = new IScroll('.thumbscroller_holder', { scrollX: true, scrollY: false, bounce: false, momentum: true,click:true});
     
     var ssholder = $('.sectionselectors');
     for(var i=0; i<5; i++) {
@@ -43,7 +43,7 @@ setTimeout(function () {
         }
     }
 
-  
+
 })
 })
    
