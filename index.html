@@ -313,6 +313,7 @@
 					}
 				}
 				$('a.pop-up').on('click', function(){
+					$('.popup-wrapper, .small-popup-wrapper').css('z-index', 0);
 					$($(this).attr('href')).css('z-index','99990');
 				})
 				$('a.close-popup').on('click', function(){
