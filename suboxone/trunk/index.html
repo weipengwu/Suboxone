@@ -269,6 +269,8 @@
 				});
 
 				show_subsection = function(new_index, last_index, dir) {
+
+					$('.popup-wrapper, .small-popup-wrapper').css('z-index', 0);
 					
 					// console.log(new_index);
 					// console.log($('.slideholder').eq(current_section).children().eq(new_index).length);
@@ -291,6 +293,8 @@
 				}
 
 				show_section = function(new_index, last_index, dir) {
+
+					$('.popup-wrapper, .small-popup-wrapper').css('z-index', 0);
 
 					if ($('.slideholder').eq(new_index).length == 0)
 						return;
