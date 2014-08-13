@@ -42,6 +42,12 @@ setTimeout(function () {
             ssholder.find('span').eq(current_ss).addClass('active');
         }
     }
+
+    $('.thumb').on('click touch', function(){ 
+
+        $(this).find('a').trigger('click');
+
+    });
 })
 })
    
