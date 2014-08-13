@@ -19,13 +19,7 @@ setTimeout(function () {
     var maxscrolloffset = (thumbscrollerwidth - thumbscrollerholderwidth) * -1;
     $('.thumbscroller').css('width', thumbscrollerwidth + 'px');
 
-    var thumbscroller = new IScroll('.thumbscroller_holder', { scrollX: true, scrollY: false, bounce: false, momentum: true, onBeforeScrollStart: function (e) {
-var target = e.target;
-while (target.nodeType != 1) target = target.parentNode;
-
-if (target.tagName == 'A')
-e.preventDefault();
-}});
+    var thumbscroller = new IScroll('.thumbscroller_holder', { scrollX: true, scrollY: false, bounce: false, momentum: true});
     
     var ssholder = $('.sectionselectors');
     for(var i=0; i<5; i++) {
