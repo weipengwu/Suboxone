@@ -43,11 +43,7 @@ setTimeout(function () {
         }
     }
 
-    $('.thumb').on('click touch', function(){ 
-
-        $(this).find('a').trigger('click');
-
-    });
+  
 })
 })
    
