@@ -76,6 +76,24 @@
 						$('#bottom-sp-leaf').show();
 						$('#bottom-dosing-leaf').hide();
 						$('#bottom-ref-leaf').hide();
+
+						setTimeout(function(){
+							$('.thumbslide').removeClass('active');
+						},1000)
+						return;
+					}
+
+					if ($(this).attr('href') == '#references')
+					{
+						$('.popup-wrapper, .small-popup-wrapper').css('z-index', 0);
+						$($(this).attr('href')).css('z-index','99990');
+						$('#bottom-sp-leaf').show();
+						$('#bottom-dosing-leaf').hide();
+						$('#bottom-ref-leaf').hide();
+
+						setTimeout(function(){
+							$('.thumbslide').removeClass('active');
+						},1000)
 						return;
 					}
 
