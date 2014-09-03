@@ -22,6 +22,11 @@
 
 				$('a.section').on('click touch', function() { 
 
+					if ($(this).attr('href') == '#home')
+					{
+						$('#home').css('top', '0px');
+					}
+
 					$('.slide').hide();
 					$('.slideholder').hide();
 					$('.slide').not('#home').removeAttr("style");
