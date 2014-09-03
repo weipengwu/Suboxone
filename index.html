@@ -22,10 +22,7 @@
 
 				$('a.section').on('click touch', function() { 
 
-					if ($(this).attr('href') == '#home')
-					{
-						$('#home').css('top', '0px');
-					}
+
 
 					$('.slide').hide();
 					$('.slideholder').hide();
@@ -34,7 +31,10 @@
 					$('.popup-wrapper, .small-popup-wrapper').css('z-index', 0);
 					$($(this).attr('href')).show();
 					$($(this).attr('href')).children().eq(0).show();
-					$($(this).attr('href')).css({top:'103px',left:'0'});
+					
+					if ($(this).attr('href') != '#home')
+						$($(this).attr('href')).css({top:'103px',left:'0'});
+
 					$($(this).attr('href')).children().eq(0).css({top:'0',left:'0'});
 
 					current_section = section_offsets[$(this).attr('href').replace('#', '')];
