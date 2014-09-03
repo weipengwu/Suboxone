@@ -105,6 +105,17 @@
 					},1000)
 
 				});
+				$('a.thumb-pop-up').on('click touch', function(){
+					$('.popup-wrapper, .small-popup-wrapper').css('z-index', 0);
+					$($(this).attr('href')).css('z-index','99990');
+					var leaf = $(this).attr('id');
+					$('.leaf').hide();
+					$('#'+leaf+'-leaf').show();
+					setTimeout(function(){
+						$('.thumbslide').removeClass('active');
+					},1000)
+
+				});
 				$('a.subsection').on('click', function() { 
 
 					$('.slide').hide();
@@ -115,7 +126,7 @@
 					t = /[0-9+]/g;
 					res = t.exec($(this).attr('href'))
 
-					current_subsection = res[0];
+					current_subsection = parseInt(res[0], 10);
 					afterclick = 1;
 					console.log(current_subsection);
 
@@ -249,9 +260,11 @@
 					console.log(current_subsection);
 					last_subsection = current_subsection; 
 					if (typeof afterclick =="undefined" || afterclick == null) {
+						console.log('har');
 						show_subsection(current_subsection + 1, last_subsection, -1); 
 					}else{
 						show_subsection(current_subsection + 1, last_subsection, -1); 
+						console.log('thar');
 						afterclick = null;
 					}
 				},
